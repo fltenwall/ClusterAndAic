@@ -1,11 +1,9 @@
 # coding=utf-8
 import random
+from typing import List
 import matplotlib.pylab as plt
 import numpy as np
 import math
-
-import csv
-import os, re
 
 def k_means_clust(data,num_clust,num_iter,w=5):
     centroids=random.sample(data,num_clust) #从data（1列列表）中随机抽取num_clust个数
@@ -118,13 +116,17 @@ def AIC(assignments,centroids,data,cls):
 #                 filename.write('\n')
 
 def findAllFile():
-            filepath = 'D:/Isla/StudyinHK/paper/result/input/3t5_A.csv'
-            test = np.genfromtxt(filepath, delimiter=',')
+            filepath = '../datasets/1st-kow.csv'
+            test = np.genfromtxt(filepath, delimiter='\t')
             data = np.vstack(test[:, :-1])
 
             res = list()
             for cls in range(2,len(data)):
                 centroids, data, assignments = k_means_clust(data, cls, 5, 2)
+                for index in len(centroids):
+                    x = [i for i in range(0,len(centroids[index]))]
+                    y = centroids[index]
+                    plt(x,y)
                 aic = AIC(assignments,centroids,data,cls)
                 res.append(aic)
                 print(cls,aic,assignments)
