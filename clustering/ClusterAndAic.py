@@ -127,7 +127,7 @@ def findAllFile():
                     x = [i for i in range(0,len(li))]
                     y = centroids[index]
                     plt.plot(x,y)
-                    plt.show()
+                plt.show()
                 aic = AIC(assignments,centroids,data,cls)
                 res.append(aic)
                 print(cls,aic,assignments)
