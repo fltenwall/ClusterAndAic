@@ -116,17 +116,18 @@ def AIC(assignments,centroids,data,cls):
 #                 filename.write('\n')
 
 def findAllFile():
-            filepath = '../datasets/1st-kow.csv'
+            filepath = '../datasets/data/1st-kow.csv'
             test = np.genfromtxt(filepath, delimiter='\t')
             data = np.vstack(test[:, :-1])
 
             res = list()
             for cls in range(2,len(data)):
                 centroids, data, assignments = k_means_clust(data, cls, 5, 2)
-                for index in len(centroids):
-                    x = [i for i in range(0,len(centroids[index]))]
+                for index,li in enumerate(centroids):
+                    x = [i for i in range(0,len(li))]
                     y = centroids[index]
-                    plt(x,y)
+                    plt.plot(x,y)
+                    plt.show()
                 aic = AIC(assignments,centroids,data,cls)
                 res.append(aic)
                 print(cls,aic,assignments)
@@ -134,12 +135,12 @@ def findAllFile():
             print(cls,resAIC)
 
             # 将结果写入文件
-            with open('D:/Isla/StudyinHK/paper/result/input/aicResult.csv', mode='a') as filename:
-                filename.write(str(cls))
-                filename.write('\t')
-                filename.write(str(resAIC))
-                filename.write('\t')
-                filename.write('\n')
+            # with open('D:/Isla/StudyinHK/paper/result/input/aicResult.csv', mode='a') as filename:
+            #     filename.write(str(cls))
+            #     filename.write('\t')
+            #     filename.write(str(resAIC))
+            #     filename.write('\t')
+            #     filename.write('\n')
 
 
 findAllFile()
